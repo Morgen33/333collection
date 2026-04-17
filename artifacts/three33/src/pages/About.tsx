@@ -9,6 +9,7 @@ const WEBSITES = [
   { name: "National Web3 Women's Day™", url: "https://womenweb3.info/" },
   { name: "Web3 Women's Directory", url: "https://directory.womenweb3.info/" },
   { name: "Boink", url: "https://boinkme.xyz/" },
+  { name: "Chainlist", url: "https://chainlist.buzz/" },
 ];
 
 const PROJECTS: { name: string; url?: string }[] = [

@@ -3,6 +3,53 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import type { Plugin, ViteDevServer } from "vite";
+
+const CANDY_MACHINE_ID = "EV6FZEwQfr1NdJ9GZ4oSHRPDJZMYgpACCwQy6ipZFNPe";
+const TOTAL_SUPPLY = 333;
+
+function candyMachineApiPlugin(): Plugin {
+  return {
+    name: "candy-machine-api",
+    configureServer(server: ViteDevServer) {
+      server.middlewares.use("/api/candy-machine", async (_req, res) => {
+        res.setHeader("Content-Type", "application/json");
+        try {
+          const rpcRes = await fetch("https://api.mainnet-beta.solana.com", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              jsonrpc: "2.0",
+              id: 1,
+              method: "getAccountInfo",
+              params: [CANDY_MACHINE_ID, { encoding: "base64" }],
+            }),
+          });
+          const json = (await rpcRes.json()) as {
+            result?: { value?: { data?: string[] } };
+          };
+          const b64 = json?.result?.value?.data?.[0];
+          if (!b64) {
+            res.end(JSON.stringify({ itemsRedeemed: 0, remaining: TOTAL_SUPPLY }));
+            return;
+          }
+          const buf = Buffer.from(b64, "base64");
+          const lo = buf.readUInt32LE(112);
+          const hi = buf.readUInt32LE(116);
+          const itemsRedeemed = hi * 2 ** 32 + lo;
+          res.end(JSON.stringify({
+            itemsRedeemed,
+            remaining: TOTAL_SUPPLY - itemsRedeemed,
+            itemsAvailable: TOTAL_SUPPLY,
+          }));
+        } catch (err) {
+          console.error("[candy-machine-api]", err);
+          res.end(JSON.stringify({ itemsRedeemed: 0, remaining: TOTAL_SUPPLY }));
+        }
+      });
+    },
+  };
+}
 
 const rawPort = process.env.PORT;
 
@@ -32,6 +79,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
+    candyMachineApiPlugin(),
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [

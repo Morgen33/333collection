@@ -44,6 +44,38 @@ function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
+async function fetchItemsRedeemed(): Promise<number> {
+  try {
+    const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+    const res = await fetch(`${base}/api/candy-machine`);
+    if (!res.ok) return 0;
+    const json = (await res.json()) as { itemsRedeemed?: number };
+    return json.itemsRedeemed ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
+function useMintCount() {
+  const [minted, setMinted] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      const count = await fetchItemsRedeemed();
+      if (!cancelled) setMinted(count);
+    };
+    load();
+    const id = setInterval(load, 30_000);
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
+  }, []);
+
+  return minted;
+}
+
 function useInView(ref: React.RefObject<HTMLElement | null>) {
   const [inView, setInView] = useState(false);
   useEffect(() => {
@@ -134,7 +166,8 @@ export default function Home() {
   const foundationInView = useInView(foundationRef);
   const mintInView = useInView(mintRef);
 
-  const mintedSoFar = 1;
+  const liveMinted = useMintCount();
+  const mintedSoFar = liveMinted ?? 1;
   const progressPct = (mintedSoFar / TOTAL_SUPPLY) * 100;
 
   const copyCA = () => {
@@ -440,17 +473,22 @@ export default function Home() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-3">
               {[
-                { label: "Price", value: "$3.33" },
-                { label: "Supply", value: "333" },
-                { label: "Remaining", value: `${TOTAL_SUPPLY - mintedSoFar}` },
-              ].map(({ label, value }) => (
+                { label: "Price", value: "$3.33", loading: false },
+                { label: "Supply", value: "333", loading: false },
+                { label: "Remaining", value: `${TOTAL_SUPPLY - mintedSoFar}`, loading: liveMinted === null },
+              ].map(({ label, value, loading }) => (
                 <div
                   key={label}
                   className="p-3 text-center"
                   style={{ border: "1px solid rgba(204,34,0,0.2)" }}
                   data-testid={`stat-${label.toLowerCase()}`}
                 >
-                  <div className="font-mono-custom font-bold text-xl" style={{ color: "#f0ede8" }}>{value}</div>
+                  <div
+                    className="font-mono-custom font-bold text-xl"
+                    style={{ color: "#f0ede8", opacity: loading ? 0.4 : 1, transition: "opacity 0.4s" }}
+                  >
+                    {value}
+                  </div>
                   <div className="font-mono-custom mt-1" style={{ fontSize: "9px", color: "rgba(240,237,232,0.35)", letterSpacing: "0.3em" }}>{label}</div>
                 </div>
               ))}

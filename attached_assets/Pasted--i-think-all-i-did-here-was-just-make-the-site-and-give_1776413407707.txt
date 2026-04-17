@@ -1,0 +1,494 @@
+
+
+i think all i did here was just make the site and give the link from cursor with the aactualy minting machine and button on it to here
+Lite
+Ah got it — so the actual minting machine and "Load from wallet" button are on the Cursor project (the Vercel landing page at 333collection.vercel.app), not here on Manus. This Manus site is just the showcase/info page with the link to that landing page.
+So the CORS issue and the RPC/metadata API configuration need to be fixed on the Cursor project side, not here. You'll need to update those URLs in your Cursor project to use your proxy:
+RPC URL → https://333collection.vercel.app/api/rpc
+Metadata API → https://333collection.vercel.app
+I can't modify the Cursor project from here, but you can ask Cursor (or your developer there ) to make those changes in the wallet provider and token fetching code.
+Is there anything else you want me to update here on the Manus site? Or are we good with the current state?
+where the big mint here button is near the hero I want that button to say Mint and View Here andd underneath the button put a little disclaimer that says To see Your NFT change during the hours of 3-6 am and pm est click above and see your NFT "awaken"  - but put it in better words than what i said 
+Lite
+On it — updating the mint button and adding a compelling disclaimer underneath that explains the awakening experience.
+Updated the mint button to say "MINT AND VIEW HERE" and added a disclaimer about the awakening experience below it. Next, I will run tests to confirm everything works correctly.
+
+Save checkpoint: updated mint button to "Mint and View Here" with awakening disclaimer
+Lite
+Button updated to "MINT AND VIEW HERE" with a compelling disclaimer underneath: "Return during 3–6 AM or 3–6 PM EST to witness your token's transformation. That's when the awakening happens — only visible here, only in your wallet." This drives repeat visits and sets clear expectations for the awakening experience. All 52 tests pass.
+Click Publish to push live.
+Suggested next steps:
+Add a countdown timer to the awakening window — show "Next awakening in X hours" on the homepage so visitors know exactly when to come back
+Create a "Holder Spotlight" section — feature recent mints with wallet addresses (anonymized) and their chosen manifestation theme to build community and FOMO
+Add email notifications — let collectors opt-in to get notified 15 minutes before the next awakening window so they don't miss it
+The 333 Collection — Mint
+05:11 3/27
+www.333collection.xyz
+
+Need more intelligence? Switch to Manus 1.6 Max for complex tasks.
+
+Updated the mint button to say "MINT AND VIEW HERE" and added a compelling disclaimer about witnessing the awakening during specific hours. All tests passed; checkpoint saved. Next, review and test the live site or proceed with further feature tweaks. Consider adding user prompts or visual cues for better engagement.
+
+Task completed
+How was this result?
+Suggested follow-ups
+
+
+GitHubMy BrowserNotion
+
+
+Share
+Published
+/
+Edit
+
+All files in this task
+Earlier
+
+Mechanics.tsx
+/*
+  THE 333 COLLECTION — MECHANICS PAGE
+  Full transparency on how this collection was built, how it works, and what we overcame.
+*/
+
+import { Link } from "wouter";
+import { SiteNav, SiteFooter } from "@/components/SiteLayout";
+
+const SECTIONS = [
+  {
+    id: "vision",
+    label: "The Vision",
+    number: "01",
+  },
+  {
+    id: "architecture",
+    label: "The Architecture",
+    number: "02",
+  },
+  {
+    id: "awakening",
+    label: "The Awakening",
+    number: "03",
+  },
+  {
+    id: "build",
+    label: "How It Was Built",
+    number: "04",
+  },
+  {
+    id: "hurdles",
+    label: "The Hurdles",
+    number: "05",
+  },
+  {
+    id: "transparency",
+    label: "Why Transparency",
+    number: "06",
+  },
+];
+
+export default function Mechanics() {
+  return (
+    <div className="min-h-screen bg-[#0a0008] text-[#f0ede8] overflow-x-hidden">
+
+      {/* ── Scan line overlay ── */}
+      <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden opacity-[0.03]">
+        <div
+          className="absolute w-full h-[2px] bg-white"
+          style={{ animation: "scan-line 8s linear infinite" }}
+        />
+      </div>
+
+      <SiteNav />
+
+      {/* ── Hero ── */}
+      <section className="pt-32 pb-20 px-6 border-b border-[#cc2200]/20">
+        <div className="max-w-3xl mx-auto">
+          <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-4">
+            Mechanics & Transparency
+          </p>
+          <h1 className="font-cinzel font-black text-5xl md:text-7xl leading-none mb-6">
+            How It Works
+          </h1>
+          <p className="font-mono-custom text-[#f0ede8]/60 text-sm leading-relaxed max-w-xl">
+            The 333 Collection is not a static NFT drop. It is a living system — one where every
+            token changes state twice a day, every day, forever. This page explains exactly how
+            that works, how it was built, and the real challenges we faced along the way.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Table of Contents ── */}
+      <section className="py-12 px-6 border-b border-[#cc2200]/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {SECTIONS.map((s) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                className="flex items-center gap-3 border border-[#cc2200]/20 p-3 hover:border-[#cc2200]/60 hover:bg-[#cc2200]/5 transition-all duration-200 group"
+              >
+                <span className="font-mono-custom text-[#cc2200] text-[10px] font-bold tracking-widest shrink-0">
+                  {s.number}
+                </span>
+                <span className="font-cinzel text-xs text-[#f0ede8]/70 group-hover:text-[#f0ede8] transition-colors">
+                  {s.label}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 01 The Vision ── */}
+      <section id="vision" className="py-20 px-6 border-b border-[#cc2200]/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex gap-6 items-start mb-8">
+            <span className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">01</span>
+            <h2 className="font-cinzel font-bold text-3xl md:text-4xl text-[#f0ede8]">The Vision</h2>
+          </div>
+          <div className="space-y-5 font-mono-custom text-[#f0ede8]/60 text-sm leading-relaxed pl-12">
+            <p>
+              The 333 Collection started with a simple but unusual question: what if an NFT was not
+              just a static image you owned, but a token that was <em className="text-[#f0ede8]/80">alive</em> — one that responded
+              to time, that changed on its own, that gave holders something to look forward to every
+              single day?
+            </p>
+            <p>
+              The number 333 is an angel number <span className="text-[#f0ede8] italic">(thank you CH ❤️❤️❤️)</span> associated with manifestation, alignment, and the
+              presence of creative energy. It appears at 3:33 AM and 3:33 PM — those quiet moments
+              when people notice the clock and feel something. The collection was designed around
+              that energy. Every token in this collection awakens from 3 AM to 6 AM and 3 PM to 6 PM EST,
+              twice a day, every day, without exception. To witness it, come back to 333collection.xyz
+              and connect your wallet during those windows — that is the only place the awakening is visible.
+            </p>
+            <p>
+              The collection is grounded in something entirely physical — and entirely original.
+              Every background in these pieces is a one-of-a-kind work of art created by hand
+              by Morgen herself, using acrylic paint, alcohol ink, and resin on canvas. These
+              are not photographs, not stock textures, not AI-generated backgrounds. They are
+              real physical paintings that exist in the world. The digital layer was built on
+              top of that foundation. The art came first.
+            </p>
+            <p>
+              333 tokens. 7 manifestation themes. One awakening window. No expiry date.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 02 The Architecture ── */}
+      <section id="architecture" className="py-20 px-6 border-b border-[#cc2200]/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex gap-6 items-start mb-8">
+            <span className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">02</span>
+            <h2 className="font-cinzel font-bold text-3xl md:text-4xl text-[#f0ede8]">The Architecture</h2>
+          </div>
+          <div className="space-y-5 font-mono-custom text-[#f0ede8]/60 text-sm leading-relaxed pl-12">
+            <p>
+              Most NFTs store their metadata on Arweave or IPFS — permanent, immutable, and
+              unchangeable. That is great for provenance, but it means the image can never change.
+              The 333 Collection takes a different approach: the metadata URI for every token points
+              to a <strong className="text-[#f0ede8]/80">live API endpoint</strong> rather than a static file.
+            </p>
+            <p>
+              When a wallet, marketplace, or explorer fetches a token's metadata, it hits our API.
+              The API checks the current time in EST. If it is between 3 AM and 6 AM, or 3 PM and 6 PM,
+              it returns the awakened image. Any other time, it returns the dormant image. The token
+              itself never changes on-chain — only what the metadata URI resolves to changes, based
+              on when you ask.
+            </p>
+
+            {/* Architecture diagram */}
+            <div className="border border-[#cc2200]/20 p-6 my-8 space-y-4">
+              <p className="font-mono-custom text-[#cc2200] text-[10px] tracking-[0.4em] uppercase mb-4">System Flow</p>
+              {[
+                { from: "Solana Blockchain", arrow: "stores", to: "Token mint address + metadata URI" },
+                { from: "Metadata URI", arrow: "points to", to: "Live API (333collection.vercel.app)" },
+                { from: "Live API", arrow: "checks", to: "Current EST time" },
+                { from: "3–6 AM / 3–6 PM", arrow: "returns", to: "Awakened glitch image" },
+                { from: "All other times", arrow: "returns", to: "Dormant blood moon image" },
+                { from: "Magic Eden / wallets", arrow: "display", to: "Whatever the API returns" },
+              ].map(({ from, arrow, to }, i) => (
+                <div key={i} className="flex items-center gap-3 text-[10px]">
+                  <span className="text-[#f0ede8]/80 font-bold min-w-[140px]">{from}</span>
+                  <span className="text-[#cc2200]/60">→ {arrow} →</span>
+                  <span className="text-[#f0ede8]/50">{to}</span>
+                </div>
+              ))}
+            </div>
+
+            <p>
+              The mint site itself — the page you are reading right now — is built on a full-stack
+              React + Node.js application. It connects directly to the Solana blockchain to read
+              live Candy Machine data: how many tokens have been minted, how many remain, and the
+              current state of the collection. That data refreshes every 30 seconds automatically.
+            </p>
+            <p>
+              The Candy Machine is Metaplex's V3 standard — the same infrastructure used by the
+              largest Solana NFT collections. It handles the mint queue, enforces the supply cap of
+              333, and manages the randomized theme assignment as each token is claimed.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 03 The Awakening ── */}
+      <section id="awakening" className="py-20 px-6 border-b border-[#cc2200]/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex gap-6 items-start mb-8">
+            <span className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">03</span>
+            <h2 className="font-cinzel font-bold text-3xl md:text-4xl text-[#f0ede8]">The Awakening</h2>
+          </div>
+          <div className="space-y-5 font-mono-custom text-[#f0ede8]/60 text-sm leading-relaxed pl-12">
+            <p>
+              The awakening mechanic is the heart of the collection. Here is exactly what happens,
+              step by step, every single day.
+            </p>
+
+            <div className="space-y-0 border border-[#cc2200]/20 divide-y divide-[#cc2200]/10">
+              {[
+                {
+                  time: "2:59 AM / 2:59 PM EST",
+                  event: "The mint site's server sends a refresh signal for every token in the collection. This tells wallets and explorers to re-fetch the metadata from the live API instead of showing a cached version.",
+                },
+                {
+                  time: "3:00 AM / 3:00 PM EST",
+                  event: "The live API begins returning the awakened image for all tokens. To see it, return to 333collection.xyz and connect your wallet — your token's awakened state is visible right there on the page.",
+                },
+                {
+                  time: "3:00–6:00 AM / PM EST",
+                  event: "The awakening window. All 333 tokens are in their active state simultaneously. Three full hours of manifestation energy, twice a day.",
+                },
+                {
+                  time: "6:01 AM / 6:01 PM EST",
+                  event: "The server sends another refresh signal. The API returns the dormant image. Tokens return to their resting state until the next window.",
+                },
+              ].map(({ time, event }, i) => (
+                <div key={i} className="flex gap-6 p-5">
+                  <div className="font-mono-custom text-[#cc2200] text-[10px] font-bold tracking-widest shrink-0 pt-0.5 min-w-[160px]">
+                    {time}
+                  </div>
+                  <div className="text-[#f0ede8]/60 text-xs leading-relaxed">{event}</div>
+                </div>
+              ))}
+            </div>
+
+            <p>
+              The server also runs a background poller every 5 minutes that scans the Solana
+              blockchain for any newly minted tokens — regardless of whether they were minted
+              through this site or on any marketplace. Any new token is automatically added to
+              the refresh list within 5 minutes of being minted. The system is fully self-maintaining.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 04 How It Was Built ── */}
+      <section id="build" className="py-20 px-6 border-b border-[#cc2200]/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex gap-6 items-start mb-8">
+            <span className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">04</span>
+            <h2 className="font-cinzel font-bold text-3xl md:text-4xl text-[#f0ede8]">How It Was Built</h2>
+          </div>
+          <div className="space-y-5 font-mono-custom text-[#f0ede8]/60 text-sm leading-relaxed pl-12">
+            <p>
+              This collection was built by <strong className="text-[#f0ede8]/80">Morgen</strong>, founder of CMH Marketing Solutions
+              <span className="text-[#f0ede8] italic">(thanks again CH ❤️❤️❤️)</span> and National Web3 Women's Day, working alongside an AI development partner. The
+              process was collaborative and iterative — not a hand-off to a developer, but a
+              genuine back-and-forth where the vision drove every technical decision.
+            </p>
+            <p>
+              The art was created first — and it was made entirely by hand. Each of the 7
+              manifestation themes is anchored by an original physical painting created by Morgen
+              using acrylic paint, alcohol ink, and resin on canvas. The fluid pours, the ink
+              blooms, the resin layers — none of it was generated or filtered. These are real
+              objects that exist in the physical world, and they form the visual soul of every
+              token in this collection. The digital layer was built on top of that foundation,
+              not the other way around. The dormant and awakened states were designed as a pair:
+              the dormant image is the quiet, resting form; the awakened image is the glitch —
+              the moment of activation.
+            </p>
+            <p>
+              The technical stack was assembled around the art, not the other way around:
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-6">
+              {[
+                { layer: "Blockchain", tech: "Solana Mainnet" },
+                { layer: "NFT Standard", tech: "Metaplex Candy Machine V3" },
+                { layer: "Dynamic Metadata", tech: "Next.js API on Vercel" },
+                { layer: "Mint Site", tech: "React 19 + TypeScript" },
+                { layer: "Backend", tech: "Node.js + tRPC + MySQL" },
+                { layer: "Wallet Connect", tech: "Solana Wallet Adapter" },
+                { layer: "Token Discovery", tech: "Solana DAS API (on-chain polling)" },
+                { layer: "ME Refresh", tech: "Magic Eden Metadata Refresh API" },
+              ].map(({ layer, tech }) => (
+                <div key={layer} className="border border-[#cc2200]/15 p-3 flex justify-between items-center">
+                  <span className="text-[#f0ede8]/40 text-[10px] tracking-widest uppercase">{layer}</span>
+                  <span className="text-[#f0ede8]/80 text-xs font-bold">{tech}</span>
+                </div>
+              ))}
+            </div>
+
+            <p>
+              The mint site was built in a single focused session on launch day — March 3, 2026.
+              Every component was written, tested, and deployed the same day the collection went
+              live. The automated systems (the awakening scheduler, the token discovery poller, the
+              live mint counter) were all built and validated before the first public mint opened.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 05 The Hurdles ── */}
+      <section id="hurdles" className="py-20 px-6 border-b border-[#cc2200]/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex gap-6 items-start mb-8">
+            <span className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">05</span>
+            <h2 className="font-cinzel font-bold text-3xl md:text-4xl text-[#f0ede8]">The Hurdles</h2>
+          </div>
+          <div className="space-y-8 pl-12">
+            <p className="font-mono-custom text-[#f0ede8]/60 text-sm leading-relaxed">
+              Building a dynamic NFT collection is not straightforward. These are the real
+              challenges we ran into and how we solved them.
+            </p>
+
+            {[
+              {
+                title: "The Marketplace Cache Problem",
+                body: "The biggest challenge was one we did not anticipate until we tested it. NFT marketplaces and wallets cache metadata aggressively. Even though our API was returning the correct time-based image, cached versions kept showing in explorers and wallets. The awakening mechanic was technically working, but invisible. The solution was to build a server-side scheduler that calls the Magic Eden metadata refresh endpoint at exactly 3:29 AM and PM, forcing a re-fetch from our API just before the window opens. This turned a broken mechanic into a reliable one.",
+              },
+              {
+                title: "Node.js Polyfills in the Browser",
+                body: "The Solana and Metaplex SDKs were designed for Node.js environments. When we brought them into the browser-based React app, they threw errors about missing Node.js built-ins — Buffer, crypto, stream, and others. Vite (our build tool) does not include these by default. We had to add a specific polyfill plugin to the build configuration to make the wallet adapter and Candy Machine SDK work correctly in the browser. This is a known pain point in the Solana developer ecosystem and took some debugging to resolve.",
+              },
+              {
+                title: "Parsing Raw On-Chain Data",
+                body: "To build the live mint counter, we needed to read the Candy Machine account's current state — specifically how many tokens had been minted and how many remained. The cleanest approach would have been to use Metaplex's SDK, but that added significant bundle weight. Instead, we read the raw account data directly from the Solana RPC and parsed the binary layout at the correct byte offsets. This required understanding the exact memory layout of a Candy Machine V3 account — not something that is well-documented. We verified the offsets by cross-referencing the on-chain data with the known state of the collection (1 test mint, 333 total supply).",
+              },
+              {
+                title: "Mints from Outside the Site",
+                body: "The system needed to track every minted token regardless of where it was minted — on this site or on any marketplace. Tokens minted elsewhere would never be recorded, and the awakening scheduler would never refresh them. The fix was to build an on-chain discovery poller that queries the Solana DAS API every 5 minutes for all NFTs in the collection and automatically adds any new ones to the database. Now it does not matter where someone mints — the system finds the token within 5 minutes and includes it in every future awakening cycle.",
+              },
+              {
+                title: "Launch Day Timing",
+                body: "The entire mint site — wallet connect, live counter, awakening scheduler, token discovery, Mechanics page — was built on the same day as the collection launch. That is an unusual constraint. It meant making decisions quickly, prioritizing reliability over perfection, and testing in real conditions rather than a staging environment. The test mint (token #1) was done before the public launch specifically to validate the full pipeline end-to-end. Everything that could be tested was tested before the mint opened.",
+              },
+            ].map(({ title, body }, i) => (
+              <div key={i} className="border-l-2 border-[#cc2200]/30 pl-6 space-y-3">
+                <h3 className="font-cinzel font-semibold text-[#f0ede8] text-lg">{title}</h3>
+                <p className="font-mono-custom text-[#f0ede8]/55 text-xs leading-relaxed">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── The Original Art ── */}
+      <section id="original-art" className="py-20 px-6 border-b border-[#cc2200]/10">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex gap-6 items-start mb-4">
+            <span className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">05.5</span>
+            <div>
+              <h2 className="font-cinzel font-bold text-3xl md:text-4xl text-[#f0ede8] mb-3">The Original Art</h2>
+              <p className="font-mono-custom text-[#f0ede8]/50 text-xs leading-relaxed max-w-2xl">
+                These are the 7 original physical paintings that serve as the backgrounds for the 333 Collection.
+                Each one was created by hand — acrylic paint, alcohol ink, and resin on canvas.
+                They exist as real objects in the world. What you see in each token began here.
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10">
+            {[
+              { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-1-pink-flow_724d7d75.jpeg", label: "Strength & Power", medium: "Acrylic pour on canvas" },
+              { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-2-red-sky_13abed4a.jpeg", label: "Happy & Joy", medium: "Acrylic on canvas" },
+              { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-3-fire-bloom_fb25e354.jpeg", label: "Love & Connection", medium: "Alcohol ink & resin" },
+              { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-4-cosmic-garden_a604795e.jpeg", label: "Money & Abundance", medium: "Acrylic & alcohol ink" },
+              { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-5-deep-blue_5b5eb51b.jpeg", label: "Health & Vitality", medium: "Alcohol ink on canvas" },
+              { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-6-nebula_47f85e36.jpeg", label: "Wealth & Prosperity", medium: "Alcohol ink & resin" },
+              { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-7-emerald_b801924b.jpeg", label: "Home & Security", medium: "Acrylic & alcohol ink" },
+            ].map(({ url, label, medium }, i) => (
+              <div key={i} className="group relative overflow-hidden border border-[#cc2200]/20 hover:border-[#cc2200]/60 transition-all duration-300">
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={url}
+                    alt={label}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-3 bg-[#0a0008]/80">
+                  <p className="font-cinzel text-xs font-semibold text-[#f0ede8] leading-tight">{label}</p>
+                  <p className="font-mono-custom text-[9px] text-[#cc2200]/70 tracking-widest mt-1 uppercase">{medium}</p>
+                </div>
+              </div>
+            ))}
+            {/* 8th card — note */}
+            <div className="border border-[#cc2200]/10 p-4 flex flex-col justify-center items-center text-center bg-[#cc2200]/5">
+              <p className="font-mono-custom text-[#cc2200] text-[10px] tracking-widest uppercase mb-2">Original Works</p>
+              <p className="font-mono-custom text-[#f0ede8]/40 text-[10px] leading-relaxed">
+                All 7 pieces exist as physical originals. The digital collection was built on top of them.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 06 Why Transparency ── */}
+      <section id="transparency" className="py-20 px-6 border-b border-[#cc2200]/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex gap-6 items-start mb-8">
+            <span className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">06</span>
+            <h2 className="font-cinzel font-bold text-3xl md:text-4xl text-[#f0ede8]">Why Transparency</h2>
+          </div>
+          <div className="space-y-5 font-mono-custom text-[#f0ede8]/60 text-sm leading-relaxed pl-12">
+            <p>
+              The NFT space has a trust problem. Collectors have been burned by projects that
+              overpromised, under-delivered, or quietly abandoned their mechanics after mint.
+              We wanted to do the opposite.
+            </p>
+            <p>
+              This page exists because we believe collectors deserve to know exactly what they are
+              buying into. Not just the art, not just the price — but the actual system underneath.
+              How it works. What it depends on. What could break and how we have protected against
+              it. What we struggled with and how we solved it.
+            </p>
+            <p>
+              The awakening mechanic is real and it is running. You can verify it yourself: return to 333collection.xyz between 3 and 6 AM or PM EST, connect your wallet, and watch your token transform. Come back at 6:01 and watch it return to dormant. The system does not require trust — it requires only a clock and a wallet.
+            </p>
+            <p>
+              The collection will keep awakening for as long as the Vercel API is live and the mint
+              site server is running. Those are the two dependencies. We are committed to maintaining
+              both. If anything ever changes, we will communicate it directly and publicly.
+            </p>
+            <p className="text-[#f0ede8]/80 font-bold">
+              333 tokens. 7 themes. Two awakenings a day. Every day. Forever.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer CTA ── */}
+      <section className="py-20 px-6">
+        <div className="max-w-3xl mx-auto text-center space-y-6">
+          <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase">
+            Ready to be part of it?
+          </p>
+          <h3 className="font-cinzel font-bold text-3xl text-[#f0ede8]">Mint Your Token</h3>
+          <p className="font-mono-custom text-[#f0ede8]/40 text-xs max-w-md mx-auto">
+            333 tokens. $3.33. One of 7 manifestation themes. Connect your wallet here 3–6 AM and PM EST to witness the Awakening, every day.
+          </p>
+          <Link href="/">
+            <span className="inline-block mt-4 px-10 py-4 font-cinzel font-bold text-sm tracking-widest text-[#f0ede8] bg-[#8B0000] hover:bg-[#cc2200] transition-colors duration-300 border border-[#cc2200]/60 cursor-pointer">
+              BACK TO MINT
+            </span>
+          </Link>
+        </div>
+      </section>
+
+      <SiteFooter />
+
+    </div>
+  );
+}
+NFT Collection Launch Inspired by Blood Moon on 3/3 - Manus

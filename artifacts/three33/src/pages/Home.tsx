@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from "react";
+import { Link } from "wouter";
 
 const CANDY_MACHINE_ID = "EV6FZEwQfr1NdJ9GZ4oSHRPDJZMYgpACCwQy6ipZFNPe";
 const COLLECTION_MINT_ID = "DDA9DiC7ahLjiu4eUbvHdsD6Go9j4ar3JQeohegQ7Jzn";
@@ -177,7 +178,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               data-testid="link-twitter"
-              className="flex items-center gap-2 transition-colors"
+              className="hidden sm:flex items-center gap-2 transition-colors"
               style={{ color: "rgba(240,237,232,0.4)", fontSize: "10px", letterSpacing: "0.3em" }}
               onMouseEnter={e => (e.currentTarget.style.color = "#cc2200")}
               onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,237,232,0.4)")}
@@ -187,6 +188,17 @@ export default function Home() {
               </svg>
               @AIARSENALS
             </a>
+            <Link href="/mechanics">
+              <span
+                className="font-mono-custom transition-colors cursor-pointer"
+                style={{ fontSize: "10px", letterSpacing: "0.3em", color: "rgba(240,237,232,0.4)" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#cc2200")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,237,232,0.4)")}
+                data-testid="link-mechanics-nav"
+              >
+                MECHANICS
+              </span>
+            </Link>
             <a
               href={MINT_LANDING_URL}
               target="_blank"

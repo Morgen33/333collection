@@ -256,7 +256,7 @@ export default function About() {
           {/* Closing quote */}
           <div className="p-8 text-center" style={{ border: "1px solid rgba(204,34,0,0.3)", background: "rgba(204,34,0,0.05)" }}>
             <p className="font-cinzel text-xl md:text-2xl font-bold leading-relaxed" style={{ color: "#f0ede8" }}>
-              Here's to big fucking things and a happy future, starting today.
+              Here's to big things and a happy future, starting today.
             </p>
             <p className="font-cinzel text-2xl font-black tracking-widest mt-4" style={{ color: "#cc2200" }}>
               THANK YOU!

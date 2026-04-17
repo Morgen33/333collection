@@ -1,0 +1,292 @@
+
+
+i think all i did here was just make the site and give the link from cursor with the aactualy minting machine and button on it to here
+Lite
+Ah got it — so the actual minting machine and "Load from wallet" button are on the Cursor project (the Vercel landing page at 333collection.vercel.app), not here on Manus. This Manus site is just the showcase/info page with the link to that landing page.
+So the CORS issue and the RPC/metadata API configuration need to be fixed on the Cursor project side, not here. You'll need to update those URLs in your Cursor project to use your proxy:
+RPC URL → https://333collection.vercel.app/api/rpc
+Metadata API → https://333collection.vercel.app
+I can't modify the Cursor project from here, but you can ask Cursor (or your developer there ) to make those changes in the wallet provider and token fetching code.
+Is there anything else you want me to update here on the Manus site? Or are we good with the current state?
+where the big mint here button is near the hero I want that button to say Mint and View Here andd underneath the button put a little disclaimer that says To see Your NFT change during the hours of 3-6 am and pm est click above and see your NFT "awaken"  - but put it in better words than what i said 
+Lite
+On it — updating the mint button and adding a compelling disclaimer underneath that explains the awakening experience.
+Updated the mint button to say "MINT AND VIEW HERE" and added a disclaimer about the awakening experience below it. Next, I will run tests to confirm everything works correctly.
+
+Save checkpoint: updated mint button to "Mint and View Here" with awakening disclaimer
+Lite
+Button updated to "MINT AND VIEW HERE" with a compelling disclaimer underneath: "Return during 3–6 AM or 3–6 PM EST to witness your token's transformation. That's when the awakening happens — only visible here, only in your wallet." This drives repeat visits and sets clear expectations for the awakening experience. All 52 tests pass.
+Click Publish to push live.
+Suggested next steps:
+Add a countdown timer to the awakening window — show "Next awakening in X hours" on the homepage so visitors know exactly when to come back
+Create a "Holder Spotlight" section — feature recent mints with wallet addresses (anonymized) and their chosen manifestation theme to build community and FOMO
+Add email notifications — let collectors opt-in to get notified 15 minutes before the next awakening window so they don't miss it
+The 333 Collection — Mint
+05:11 3/27
+www.333collection.xyz
+
+Need more intelligence? Switch to Manus 1.6 Max for complex tasks.
+
+Updated the mint button to say "MINT AND VIEW HERE" and added a compelling disclaimer about witnessing the awakening during specific hours. All tests passed; checkpoint saved. Next, review and test the live site or proceed with further feature tweaks. Consider adding user prompts or visual cues for better engagement.
+
+Task completed
+How was this result?
+Suggested follow-ups
+
+
+GitHubMy BrowserNotion
+
+
+Share
+Published
+/
+Edit
+
+All files in this task
+Earlier
+
+About.tsx
+/*
+  THE 333 COLLECTION — ABOUT PAGE
+  Creator bio in Morgen's exact words
+*/
+
+import { Link } from "wouter";
+import { SiteNav, SiteFooter } from "@/components/SiteLayout";
+
+const INSTAGRAM_URL = "https://www.instagram.com/morgen__victoria/";
+const TWITTER_URL = "https://x.com/AiArsenals";
+
+const WEBSITES = [
+  { name: "CMH Marketing Solutions", url: "https://builtbycmh.com/" },
+  { name: "National Web3 Women's Day™", url: "https://womenweb3.info/" },
+  { name: "Web3 Women's Directory", url: "https://directory.womenweb3.info/" },
+  { name: "Boink", url: "https://boinkme.xyz/" },
+];
+
+const PROJECTS: { name: string; url?: string }[] = [
+  { name: "MAFIAxDAO", url: "https://mafiadao.lovable.app" },
+  { name: "SolGods NFTs", url: "https://solgodsnfts.com/" },
+  { name: "SuiLife", url: "https://www.suilife.io/" },
+  { name: "DundiesDistrict", url: "https://itisbecauseofmysexybody.com/" },
+  { name: "Defcon7 – Women's Crypto Lead" },
+  { name: "Tradie Coin", url: "https://tradiecoin.xyz/" },
+  { name: "HoneyBee Lounge" },
+  { name: "Silence Redemption – The 2nd Crusade CTO", url: "https://silenceredemption.com/" },
+];
+
+export default function About() {
+  return (
+    <div className="min-h-screen bg-[#0a0008] text-[#f0ede8] overflow-x-hidden">
+
+      {/* ── Scan line overlay ── */}
+      <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden opacity-[0.03]">
+        <div
+          className="absolute w-full h-[2px] bg-white"
+          style={{ animation: "scan-line 8s linear infinite" }}
+        />
+      </div>
+
+      <SiteNav />
+
+      {/* ── HEADER ── */}
+      <section className="pt-32 pb-16 px-4 border-b border-[#cc2200]/20">
+        <div className="max-w-3xl mx-auto">
+          <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-4">The Creator</p>
+          <h1 className="font-cinzel font-black text-5xl md:text-7xl text-[#f0ede8] leading-none mb-6">
+            About
+          </h1>
+          <div className="w-16 h-px bg-[#cc2200] mb-6" />
+          <div className="flex flex-wrap gap-5 items-center">
+            {/* Twitter */}
+            <a href={TWITTER_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono-custom text-[10px] text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              @AIARSENALS
+            </a>
+            {/* Instagram */}
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono-custom text-[10px] text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              @MORGEN__VICTORIA
+            </a>
+            {/* LinkedIn */}
+            <a href="https://www.linkedin.com/in/morgeno/" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono-custom text-[10px] text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LINKEDIN
+            </a>
+            {/* Facebook personal */}
+            <a href="https://www.facebook.com/Morgen36" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono-custom text-[10px] text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              MORGEN36
+            </a>
+            {/* Facebook CMH */}
+            <a href="https://www.facebook.com/CMHMarketing/" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono-custom text-[10px] text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              CMH MARKETING
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── BIO ── */}
+      <section className="py-16 px-4">
+        <div className="max-w-3xl mx-auto space-y-8">
+
+          {/* Opening */}
+          <div>
+            <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.4em] uppercase mb-4">About the Creator</p>
+            <p className="font-cinzel text-lg md:text-xl text-[#f0ede8] leading-relaxed">
+              I'm Morgen — a Web3 builder, digital architect, and creative strategist operating at the intersection of NFTs, AI, community, and real-world utility.
+            </p>
+          </div>
+
+          {/* Before Web3 */}
+          <div className="border-l border-[#cc2200]/30 pl-6">
+            <p className="font-cinzel text-sm font-semibold text-[#cc2200] mb-3">Before Web3, I built community in real life.</p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed">
+              I spent 20 years bartending, managed a bar, and served as Head of Promotions and Events for a decade. I didn't just work behind the bar — I built brands. I started, ran, and grew the social media accounts for two bars from the ground up, turning physical locations into recognizable local brands. I filled rooms, created experiences people talked about, and built loyalty that lasted.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mt-4">
+              That foundation — understanding energy, psychology, atmosphere, and audience — is what shapes everything I build on-chain.
+            </p>
+          </div>
+
+          {/* Physical art */}
+          <div className="border-l border-[#cc2200]/30 pl-6">
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed">
+              Alongside live events, I create physical resin art geodes and mixed media pieces using acrylic paint, pigment powders, and alcohol ink — layering texture, color, and depth into every piece. That philosophy carries directly into my digital collections.
+            </p>
+          </div>
+
+          {/* NW3WD */}
+          <div className="border-l border-[#cc2200]/30 pl-6">
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed">
+              I'm the founder of <span className="text-[#f0ede8]">National Web3 Women's Day™</span> (celebrated every October 11) and the architect behind the <span className="text-[#f0ede8]">Web3 Women's Directory</span> — a searchable, living ledger documenting women building in blockchain, NFTs, AI, and decentralized technology.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/50 text-sm leading-relaxed mt-4 italic">
+              National Web3 Women's Day would not exist without my co-founder, Veronika. Thank you for all that you have done for me, for us. I will forever love you.
+            </p>
+          </div>
+
+          {/* Boink */}
+          <div className="border-l border-[#cc2200]/30 pl-6">
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed">
+              I'm also the founder of <span className="text-[#f0ede8]">Boink</span>, a Web3 dating and networking platform launched during the BONK hackathon, powered by a dual-AI compatibility system and $BOINK on Solana.
+            </p>
+          </div>
+
+          {/* CMH */}
+          <div className="border-l border-[#cc2200]/30 pl-6">
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed">
+              Through <span className="text-[#f0ede8]">CMH Marketing Solutions</span>, I design high-converting websites and AI-driven marketing systems for contractors, founders, and Web3 projects — blending design, SEO + GEO, automation, and token integration.
+            </p>
+          </div>
+
+          {/* 333 personal */}
+          <div className="border-t border-[#cc2200]/20 pt-8">
+            <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.4em] uppercase mb-4">This Collection</p>
+            <p className="font-cinzel text-lg text-[#f0ede8] leading-relaxed mb-6">
+              This collection is very special to me.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mb-4">
+              For most of my life, I've seen 333 everywhere. It shows up constantly. I wore number 33 on multiple sports teams growing up. I wink at Corvettes three times every time I see them for good luck. It's just always been there. Some may even say it's an angel number. <span className="text-[#f0ede8] italic">(yes thank you for a 3rd time CH ❤️❤️❤️)</span>
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mb-4">
+              With 3/3 and the blood moon aligning, I knew I had to release something.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mb-4">
+              The goal is to launch at 3:30 PM EST on 3/3 so it's live at 3:33 PM EST. For me, this signifies change. Big things. Great things. The things I've always wanted to make real for myself. It's written in the metadata now. It's on-chain.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mb-4">
+              This collection is a reminder and a promise to myself. Every single day — I <span className="text-[#f0ede8] font-semibold">WILL</span> and I <span className="text-[#f0ede8] font-semibold">AM</span> working toward these goals. Not someday. Not eventually. Every. Day.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mb-4">
+              These seven images are layered over real, physical art pieces I created by hand. Each one begins in the physical world and transitions into digital permanence. A total of 333 pieces are being released across the seven images.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mb-4">
+              The images evolve every day, 3–6 AM and 3–6 PM EST. It was challenging to build on Solana, but it's live and running — every single day.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mb-4">
+              If you're here reading this, that alone means more than you know. Thank you.
+            </p>
+            <p className="font-mono-custom text-[#f0ede8]/70 text-sm leading-relaxed mb-4">
+              It's time for a change — and that starts with me.
+            </p>
+          </div>
+
+          {/* Closing */}
+          <div className="border border-[#cc2200]/30 p-8 bg-[#cc2200]/5 text-center">
+            <p className="font-cinzel text-xl md:text-2xl font-bold text-[#f0ede8] leading-relaxed mb-2">
+              Here's to big fucking things and a happy future, starting today.
+            </p>
+            <p className="font-cinzel text-2xl font-black text-[#cc2200] tracking-widest mt-4">THANK YOU!</p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── WEBSITES BUILT ── */}
+      <section className="py-16 px-4 border-t border-[#cc2200]/20">
+        <div className="max-w-3xl mx-auto">
+          <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-8">Websites I Built</p>
+          <div className="space-y-4">
+            {WEBSITES.map(({ name, url }) => (
+              <a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between group border border-[#cc2200]/15 hover:border-[#cc2200]/50 p-4 transition-all duration-300 hover:bg-[#cc2200]/5"
+              >
+                <span className="font-cinzel text-sm font-semibold text-[#f0ede8] group-hover:text-[#cc2200] transition-colors">
+                  {name}
+                </span>
+                <span className="font-mono-custom text-[10px] text-[#f0ede8]/30 group-hover:text-[#cc2200]/60 transition-colors tracking-widest">
+                  {url.replace("https://", "")} →
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROJECTS INVOLVED IN ── */}
+      <section className="py-16 px-4 border-t border-[#cc2200]/20">
+        <div className="max-w-3xl mx-auto">
+          <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-8">Projects I'm Involved In</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {PROJECTS.map(({ name, url }) =>
+              url ? (
+                <a
+                  key={name}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block border border-[#cc2200]/15 hover:border-[#cc2200]/50 p-4 font-cinzel text-sm text-[#f0ede8]/70 hover:text-[#cc2200] transition-all duration-300 hover:bg-[#cc2200]/5"
+                >
+                  {name}
+                </a>
+              ) : (
+                <div
+                  key={name}
+                  className="border border-[#cc2200]/15 p-4 font-cinzel text-sm text-[#f0ede8]/70 hover:text-[#f0ede8] hover:border-[#cc2200]/40 transition-all duration-300"
+                >
+                  {name}
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <SiteFooter />
+
+    </div>
+  );
+}
+NFT Collection Launch Inspired by Blood Moon on 3/3 - Manus

@@ -188,6 +188,17 @@ export default function Home() {
               </svg>
               @AIARSENALS
             </a>
+            <Link href="/about">
+              <span
+                className="font-mono-custom transition-colors cursor-pointer"
+                style={{ fontSize: "10px", letterSpacing: "0.3em", color: "rgba(240,237,232,0.4)" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#cc2200")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,237,232,0.4)")}
+                data-testid="link-about-nav"
+              >
+                ABOUT
+              </span>
+            </Link>
             <Link href="/mechanics">
               <span
                 className="font-mono-custom transition-colors cursor-pointer"

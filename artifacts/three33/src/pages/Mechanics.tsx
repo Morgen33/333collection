@@ -101,7 +101,17 @@ export default function Mechanics() {
         <Link href="/">
           <span className="font-cinzel font-black text-sm tracking-[0.4em] cursor-pointer" style={{ color: "#f0ede8" }}>333</span>
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5">
+          <Link href="/about">
+            <span
+              className="font-mono-custom transition-colors cursor-pointer"
+              style={{ fontSize: "10px", letterSpacing: "0.3em", color: "rgba(240,237,232,0.4)" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#cc2200")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,237,232,0.4)")}
+            >
+              ABOUT
+            </span>
+          </Link>
           <Link href="/mechanics">
             <span className="font-mono-custom transition-colors cursor-pointer" style={{ fontSize: "10px", letterSpacing: "0.3em", color: "#cc2200" }}>
               MECHANICS

@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "333 The Collection"
+version = "1.0.0"
+id = "artifacts/three33"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18304
+
+[services.development]
+run = "pnpm --filter @workspace/three33 run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/three33", "run", "build" ]
+publicDir = "artifacts/three33/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18304"
+BASE_PATH = "/"

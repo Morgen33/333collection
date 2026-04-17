@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Share+Tech+Mono&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-primary-border: var(--sidebar-primary-border);
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-accent-border: var(--sidebar-accent-border);
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  --font-sans: 'Share Tech Mono', monospace;
+  --font-serif: 'Cinzel', serif;
+  --font-mono: 'Share Tech Mono', monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --button-outline: rgba(204,34,0,.20);
+  --badge-outline: rgba(204,34,0,.08);
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(204,34,0,.06);
+  --elevate-2: rgba(204,34,0,.12);
+
+  --background: 320 40% 4%;
+  --foreground: 30 20% 94%;
+  --border: 0 70% 40%;
+  --card: 320 35% 7%;
+  --card-foreground: 30 20% 94%;
+  --card-border: 0 60% 25%;
+  --sidebar: 320 35% 6%;
+  --sidebar-foreground: 30 20% 90%;
+  --sidebar-border: 0 60% 20%;
+  --sidebar-primary: 0 75% 40%;
+  --sidebar-primary-foreground: 30 20% 94%;
+  --sidebar-accent: 0 60% 20%;
+  --sidebar-accent-foreground: 30 20% 85%;
+  --sidebar-ring: 0 75% 40%;
+  --popover: 320 35% 6%;
+  --popover-foreground: 30 20% 94%;
+  --popover-border: 0 60% 25%;
+  --primary: 0 75% 40%;
+  --primary-foreground: 30 20% 94%;
+  --secondary: 320 25% 12%;
+  --secondary-foreground: 30 20% 85%;
+  --muted: 320 20% 10%;
+  --muted-foreground: 30 15% 55%;
+  --accent: 0 60% 28%;
+  --accent-foreground: 30 20% 94%;
+  --destructive: 0 84% 50%;
+  --destructive-foreground: 30 20% 94%;
+  --input: 0 50% 30%;
+  --ring: 0 75% 40%;
+  --chart-1: 0 75% 40%;
+  --chart-2: 30 80% 55%;
+  --chart-3: 320 40% 60%;
+  --chart-4: 0 60% 30%;
+  --chart-5: 30 70% 45%;
+
+  --radius: 0rem;
+
+  --primary-border: hsl(var(--primary));
+  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --secondary-border: hsl(var(--secondary));
+  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --muted-border: hsl(var(--muted));
+  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --accent-border: hsl(var(--accent));
+  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --destructive-border: hsl(var(--destructive));
+  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-primary-border: hsl(var(--sidebar-primary));
+  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-accent-border: hsl(var(--sidebar-accent));
+  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background-color: #0a0008;
+    color: #f0ede8;
+  }
+}
+
+/* ── Custom Animations ── */
+@keyframes scan-line {
+  0% { top: -2px; }
+  100% { top: 100%; }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+@keyframes glitch {
+  0%, 95%, 100% { clip-path: none; transform: none; }
+  96% { clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); transform: translate(-4px, 2px); color: #cc2200; }
+  97% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translate(4px, -2px); color: #f0ede8; }
+  98% { clip-path: none; transform: translate(-2px, 0); }
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(204, 34, 0, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(204, 34, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(204, 34, 0, 0); }
+}
+
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blood-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(204,34,0,0.15), 0 0 60px rgba(204,34,0,0.05); }
+  50% { box-shadow: 0 0 40px rgba(204,34,0,0.35), 0 0 100px rgba(204,34,0,0.15); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.7; }
+  94% { opacity: 1; }
+  96% { opacity: 0.5; }
+  97% { opacity: 1; }
+}
+
+.glitch-text {
+  animation: glitch 8s infinite;
+}
+
+.pulse-ring {
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+
+.blood-glow {
+  animation: blood-glow-pulse 4s ease-in-out infinite;
+}
+
+.fade-up {
+  animation: float-up 1.2s ease-out forwards;
+}
+
+.flicker {
+  animation: flicker 6s infinite;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-mono-custom {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Scanline effect */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Star field */
+.star-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: rgba(240,237,232,0.6);
+  border-radius: 50%;
+}

@@ -1,0 +1,580 @@
+
+
+im in manus, where the hell is management
+Lite
+The Management UI is accessed from the right side panel in Manus. Look for:
+A sidebar/panel icon in the top-right corner of your screen (usually looks like three horizontal lines ≡ or a sidebar toggle)
+Click it to open the Management UI panel on the right side
+Once open, you'll see navigation options including Settings → Domains
+Alternatively, if you're looking at the chat interface, there should be a card button or icon near the top-right that says something like "View Dashboard" or "Manage Project" — click that to open the Management UI.
+If you're still not seeing it, can you describe what's currently on your screen? That'll help me pinpoint exactly where to look.
+so i bought the domain name with you guys and i shoud own that and have it be good for a year, i want to deploy this site with vercel instead
+Lite
+You're right — you bought the domain through Manus, so it should be valid. The expiration message may be a billing or account sync issue on Manus's end. For support with that, reach out to https://help.manus.im.
+Regarding Vercel deployment: I can help you export the code and deploy to Vercel. Here's what we'd do:
+Export the code to GitHub — Use the Management UI (Settings → GitHub ) to push the project to a new GitHub repo under your account
+Connect Vercel to that repo — Vercel will auto-detect the project and deploy it
+Point your domain — Once live on Vercel, update your domain's DNS to point to Vercel's servers
+Important: This is a full-stack app (React frontend + Express backend + MySQL database). Vercel's standard hosting supports the frontend easily, but the backend and database require:
+A separate backend host (Railway, Render, Fly.io, etc.) for the Express server
+A managed MySQL database (PlanetScale, Railway, etc.)
+Easier path: Keep it on Manus (which handles all of this automatically) and just fix the domain renewal issue through help.manus.im. But if you want Vercel, I can walk you through the multi-service setup.
+Which would you prefer?
+im trying to hook up phantom wallet with this over on cursor but- Hi, I’m building the mint/landing for 333 The Collection (333collection.xyz / three33mint-luq9frbk.manus.space). The “Load from wallet” action is failing with “failed to fetch” because the app is calling an external RPC and API from the browser and hitting CORS.
+I’ve set up a proxy on my side so that:
+RPC: https://333collection.vercel.app/api/rpc
+Metadata API (token data): https://333collection.vercel.app (calls go to /api/token/1, etc.)
+Can you tell me where in the Manus project I can set:
+RPC / Helius URL to: https://333collection.vercel.app/api/rpc
+Metadata / API base URL to: https://333collection.vercel.app
+so that the wallet load and token metadata requests go through this proxy instead of directly from the browser? That should fix the “failed to fetch” for Load from wallet.
+Thanks.
+Even shorter (if you prefer)
+Hi — “Load from wallet” on my Manus app fails with “failed to fetch” (CORS). I have a proxy at 333collection.vercel.app. Where can I set the RPC URL to https://333collection.vercel.app/api/rpc and the metadata API to https://333collection.vercel.app so the app uses that instead of calling the RPC/API directly from the browser? Thanks.
+Lite
+Got it — the "Load from wallet" is hitting CORS because it's calling the RPC and metadata API directly from the browser. You need to route those through your proxy server. Let me find where those URLs are configured in the Manus project and update them.
+I identified the domain expired, need to renew it via Manus. The site is accessible at the fallback URL. Next, I'll update RPC and metadata URLs to route through the Vercel proxy to fix CORS issues.
+
+Found RPC URL in SolanaWalletProvider.tsx; will update it to the Vercel proxy. Next, will verify API configurations for metadata and token fetches and revise URLs accordingly.
+
+Lite
+I found the RPC endpoint configuration. The issue is in SolanaWalletProvider.tsx — it's using the public Helius RPC directly from the browser, which is hitting CORS. I need to know: where is the "Load from wallet" button located? Is it in WalletMintButton.tsx, or is it a separate component on the landing page (the Vercel app)?
+If it's on the Vercel landing page, I can't modify that from here — you'd need to update it there. But if it's in the Manus app, I can change the RPC endpoint to use your proxy. Let me know which one, and I'll make the fix.
+i think all i did here was just make the site and give the link from cursor with the aactualy minting machine and button on it to here
+Lite
+Ah got it — so the actual minting machine and "Load from wallet" button are on the Cursor project (the Vercel landing page at 333collection.vercel.app), not here on Manus. This Manus site is just the showcase/info page with the link to that landing page.
+So the CORS issue and the RPC/metadata API configuration need to be fixed on the Cursor project side, not here. You'll need to update those URLs in your Cursor project to use your proxy:
+RPC URL → https://333collection.vercel.app/api/rpc
+Metadata API → https://333collection.vercel.app
+I can't modify the Cursor project from here, but you can ask Cursor (or your developer there ) to make those changes in the wallet provider and token fetching code.
+Is there anything else you want me to update here on the Manus site? Or are we good with the current state?
+where the big mint here button is near the hero I want that button to say Mint and View Here andd underneath the button put a little disclaimer that says To see Your NFT change during the hours of 3-6 am and pm est click above and see your NFT "awaken"  - but put it in better words than what i said 
+Lite
+On it — updating the mint button and adding a compelling disclaimer underneath that explains the awakening experience.
+Updated the mint button to say "MINT AND VIEW HERE" and added a disclaimer about the awakening experience below it. Next, I will run tests to confirm everything works correctly.
+
+Save checkpoint: updated mint button to "Mint and View Here" with awakening disclaimer
+Lite
+Button updated to "MINT AND VIEW HERE" with a compelling disclaimer underneath: "Return during 3–6 AM or 3–6 PM EST to witness your token's transformation. That's when the awakening happens — only visible here, only in your wallet." This drives repeat visits and sets clear expectations for the awakening experience. All 52 tests pass.
+Click Publish to push live.
+Suggested next steps:
+Add a countdown timer to the awakening window — show "Next awakening in X hours" on the homepage so visitors know exactly when to come back
+Create a "Holder Spotlight" section — feature recent mints with wallet addresses (anonymized) and their chosen manifestation theme to build community and FOMO
+Add email notifications — let collectors opt-in to get notified 15 minutes before the next awakening window so they don't miss it
+The 333 Collection — Mint
+05:11 3/27
+www.333collection.xyz
+
+Need more intelligence? Switch to Manus 1.6 Max for complex tasks.
+
+Updated the mint button to say "MINT AND VIEW HERE" and added a compelling disclaimer about witnessing the awakening during specific hours. All tests passed; checkpoint saved. Next, review and test the live site or proceed with further feature tweaks. Consider adding user prompts or visual cues for better engagement.
+
+Task completed
+How was this result?
+Suggested follow-ups
+
+
+GitHubMy BrowserNotion
+
+
+Share
+Published
+/
+Edit
+
+Loading preview, please wait…
+
+ and get notified when it's ready.
+
+All files in this task
+Earlier
+
+Home.tsx
+/*
+  THE 333 COLLECTION — MINT PAGE
+  Design: Occult Brutalism meets Sacred Geometry
+  Countdown target: 3:00 PM EST on 3/3/2026
+  Candy Machine: EV6FZEwQfr1NdJ9GZ4oSHRPDJZMYgpACCwQy6ipZFNPe
+*/
+
+import { useEffect, useState, useCallback } from "react";
+import { Link } from "wouter";
+import ThreeMoon from "@/components/ThreeMoon";
+import { trpc } from "@/lib/trpc";
+
+const BLOOD_MOON_GIF = "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/blood_moon_333_50fb3100.gif";
+const NFT_BASE_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/333-nft-preview_7fccba26.png";
+const CANDY_MACHINE_ID = "EV6FZEwQfr1NdJ9GZ4oSHRPDJZMYgpACCwQy6ipZFNPe";
+const COLLECTION_MINT_ID = "DDA9DiC7ahLjiu4eUbvHdsD6Go9j4ar3JQeohegQ7Jzn";
+const MAGIC_EDEN_MINT_URL = `https://magiceden.io/launchpad/${CANDY_MACHINE_ID}`;
+const TENSOR_MINT_URL = `https://www.tensor.trade/mint/${CANDY_MACHINE_ID}`;
+const MINT_LANDING_URL = "https://333landingpage.vercel.app";
+const TWITTER_URL = "https://x.com/AiArsenals";
+
+// 3:00 PM EST on 3/3/2026 = 20:00 UTC
+const MINT_OPEN_TIME = new Date("2026-03-03T20:00:00.000Z");
+const TOTAL_SUPPLY = 333; // fallback only
+
+const THEMES = [
+  { name: "Strength & Power", emoji: "⚡" },
+  { name: "Happy & Joy", emoji: "✨" },
+  { name: "Love & Connection", emoji: "♥" },
+  { name: "Money & Abundance", emoji: "💰" },
+  { name: "Health & Vitality", emoji: "🌿" },
+  { name: "Wealth & Prosperity", emoji: "👑" },
+  { name: "Home & Security", emoji: "🏠" },
+];
+
+function useCountdown(target: Date) {
+  const calc = useCallback(() => {
+    const diff = target.getTime() - Date.now();
+    if (diff <= 0) return { hours: 0, minutes: 0, seconds: 0, done: true };
+    const hours = Math.floor(diff / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+    return { hours, minutes, seconds, done: false };
+  }, [target]);
+
+  const [time, setTime] = useState(calc);
+
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 1000);
+    return () => clearInterval(id);
+  }, [calc]);
+
+  return time;
+}
+
+function pad(n: number) {
+  return String(n).padStart(2, "0");
+}
+
+export default function Home() {
+  const countdown = useCountdown(MINT_OPEN_TIME);
+  const [copied, setCopied] = useState(false);
+
+  const copyCA = () => {
+    navigator.clipboard.writeText(CANDY_MACHINE_ID);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  // Live Candy Machine stats — refreshes every 30 seconds
+  const { data: mintStats } = trpc.mint.stats.useQuery(undefined, {
+    refetchInterval: 30_000,
+    staleTime: 25_000,
+  });
+  const mintedSoFar = mintStats?.minted ?? 1;
+  const totalSupply = mintStats?.total ?? TOTAL_SUPPLY;
+  const remaining = mintStats?.remaining ?? (TOTAL_SUPPLY - 1);
+  const progressPct = (mintedSoFar / totalSupply) * 100;
+
+  return (
+    <div className="min-h-screen bg-[#0a0008] text-[#f0ede8] overflow-x-hidden">
+
+      {/* ── Scan line overlay ── */}
+      <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden opacity-[0.03]">
+        <div
+          className="absolute w-full h-[2px] bg-white"
+          style={{ animation: "scan-line 8s linear infinite" }}
+        />
+      </div>
+
+      {/* ── HERO ── */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        {/* Three.js NASA moon */}
+        <ThreeMoon />
+        {/* Dark vignette edges */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0008]/40 via-transparent to-[#0a0008]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0008]/25 via-transparent to-[#0a0008]/25" />
+
+        {/* Hero content */}
+        <div className="relative z-10 text-center px-4 fade-up">
+          <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.4em] uppercase mb-4">
+            3 · 3 · 2026 &nbsp;|&nbsp; Blood Moon Launch
+          </p>
+          {/* Twitter link in hero */}
+          <a
+            href={TWITTER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-mono-custom text-[10px] text-[#f0ede8]/30 hover:text-[#cc2200] transition-colors tracking-widest mb-4"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            @AIARSENALS
+          </a>
+          <h1 className="font-cinzel font-black text-6xl md:text-8xl lg:text-9xl leading-none mb-2 glitch-text">
+            333
+          </h1>
+          <h2 className="font-cinzel font-semibold text-xl md:text-3xl tracking-widest text-[#f0ede8]/90 mb-8">
+            THE COLLECTION
+          </h2>
+          <p className="font-mono-custom text-[#f0ede8]/60 text-sm max-w-md mx-auto leading-relaxed">
+            333 manifestation tokens on Solana.<br />
+            Connect your wallet here to witness the Awakening — 3–6 AM and PM EST, every day.
+          </p>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+          <div className="w-px h-12 bg-[#cc2200]" style={{ animation: "breathe 2s ease-in-out infinite" }} />
+          <span className="font-mono-custom text-[10px] tracking-widest text-[#cc2200]">SCROLL</span>
+        </div>
+      </section>
+
+      {/* ── COUNTDOWN ── */}
+      <section className="py-20 px-4 border-t border-[#cc2200]/20">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="font-cinzel text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-8">
+            {countdown.done ? "Mint Is Live" : "Mint Opens In"}
+          </p>
+
+          {countdown.done ? (
+            <div className="flex flex-col items-center gap-6">
+              <a
+                href={MINT_LANDING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-cinzel text-3xl md:text-5xl font-bold text-[#cc2200] pulse-ring py-6 px-12 border border-[#cc2200]/40 inline-block hover:bg-[#cc2200]/10 transition-colors duration-300"
+              >
+                MINT AND VIEW HERE
+              </a>
+              <p className="font-mono-custom text-[#f0ede8]/50 text-xs max-w-lg leading-relaxed tracking-wide">
+                Return during 3–6 AM or 3–6 PM EST to witness your token's transformation. That's when the awakening happens — only visible here, only in your wallet.
+              </p>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-4 md:gap-8">
+              {[
+                { label: "HRS", value: pad(countdown.hours) },
+                { label: "MIN", value: pad(countdown.minutes) },
+                { label: "SEC", value: pad(countdown.seconds) },
+              ].map(({ label, value }, i) => (
+                <div key={i} className="flex flex-col items-center">
+                  <div className="font-mono-custom font-bold text-5xl md:text-7xl text-[#f0ede8] tabular-nums leading-none">
+                    {value}
+                  </div>
+                  <div className="font-mono-custom text-[10px] tracking-[0.4em] text-[#cc2200] mt-2">{label}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <p className="font-mono-custom text-[#f0ede8]/40 text-xs mt-8 tracking-widest">
+            3:00 PM EST · MARCH 3, 2026
+          </p>
+        </div>
+      </section>
+
+      {/* ── NFT PREVIEW + MINT ── */}
+      <section className="py-20 px-4 border-t border-[#cc2200]/20">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+          {/* NFT image */}
+          <div className="relative">
+            <div className="relative blood-glow rounded-sm overflow-hidden border border-[#cc2200]/30">
+              <img
+                src={NFT_BASE_IMAGE}
+                alt="The 333 Collection — Preview"
+                className="w-full aspect-square object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0a0008] to-transparent p-4">
+                <p className="font-mono-custom text-[10px] text-[#cc2200] tracking-widest">DORMANT STATE</p>
+                <p className="font-cinzel text-xs text-[#f0ede8]/60">Connect your wallet here to see it awaken</p>
+              </div>
+            </div>
+            {/* Corner decorations */}
+            <div className="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-[#cc2200]" />
+            <div className="absolute -top-1 -right-1 w-4 h-4 border-t border-r border-[#cc2200]" />
+            <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b border-l border-[#cc2200]" />
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-[#cc2200]" />
+            {/* Placeholder disclaimer */}
+            <p className="font-mono-custom text-[#f0ede8]/25 text-[9px] tracking-wider mt-3 text-center leading-relaxed">
+              This image is a preview placeholder — the actual token artwork will be revealed once minting begins.
+            </p>
+          </div>
+
+          {/* Mint info */}
+          <div className="space-y-6">
+            <div>
+              <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.4em] uppercase mb-2">Collection</p>
+              <h3 className="font-cinzel font-bold text-3xl md:text-4xl text-[#f0ede8]">The 333 Collection</h3>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { label: "Price", value: "$3.33" },
+                { label: "Supply", value: "333" },
+                { label: "Remaining", value: String(remaining) },
+              ].map(({ label, value }) => (
+                <div key={label} className="border border-[#cc2200]/20 p-3 text-center">
+                  <div className="font-mono-custom font-bold text-xl text-[#f0ede8]">{value}</div>
+                  <div className="font-mono-custom text-[10px] text-[#f0ede8]/40 tracking-widest mt-1">{label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Progress bar */}
+            <div>
+              <div className="flex justify-between font-mono-custom text-[10px] text-[#f0ede8]/40 tracking-widest mb-2">
+                <span>MINTED</span>
+                <span>{mintedSoFar} / {totalSupply}</span>
+              </div>
+              <div className="h-1 bg-[#f0ede8]/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#cc2200] rounded-full transition-all duration-1000"
+                  style={{ width: `${progressPct}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Royalties */}
+            <div className="font-mono-custom text-[10px] text-[#f0ede8]/40 tracking-widest">
+              5% ROYALTIES · SOLANA MAINNET · METAPLEX CANDY MACHINE V3
+            </div>
+
+            {/* Mint button — links to landing page */}
+            <a
+              href={MINT_LANDING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full py-5 text-center font-cinzel font-bold text-lg tracking-widest text-[#f0ede8] bg-[#8B0000] hover:bg-[#cc2200] transition-colors duration-300 pulse-ring border border-[#cc2200]/60"
+            >
+              MINT HERE NOW
+            </a>
+
+            {/* Contract address */}
+            <button
+              onClick={copyCA}
+              className="w-full font-mono-custom text-[10px] text-[#f0ede8]/30 hover:text-[#cc2200] transition-colors tracking-widest truncate text-left"
+            >
+              {copied ? "✓ COPIED" : `CM: ${CANDY_MACHINE_ID}`}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── HOW TO MINT ── */}
+      <section className="py-16 px-4 border-t border-[#cc2200]/20 bg-[#cc2200]/5">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-4">How To Mint</p>
+               <h3 className="font-cinzel font-bold text-xl md:text-2xl text-[#f0ede8] mb-8">3 Steps. Right Here.</h3>
+          <div className="grid md:grid-cols-3 gap-6 text-left">
+            {[
+              { n: "1", title: "Get a Solana wallet", body: "Download Phantom or Solflare. Fund it with at least $5 in SOL to cover the $3.33 mint price + gas fees." },
+              { n: "2", title: "Connect your wallet", body: "Click MINT HERE NOW above and connect your Phantom or Solflare wallet on the mint page. No marketplace needed." },
+              { n: "3", title: "Come back & witness it", body: "After minting, return here and connect your wallet during 3–6 AM or 3–6 PM EST. This is the only place you'll see your token awaken — right here, every single day." },
+            ].map(({ n, title, body }) => (
+              <div key={n} className="flex gap-4">
+                <div className="font-cinzel font-black text-3xl text-[#cc2200]/40 shrink-0 leading-none">{n}</div>
+                <div>
+                  <div className="font-cinzel font-semibold text-[#f0ede8] text-sm mb-1">{title}</div>
+                  <div className="font-mono-custom text-[#f0ede8]/40 text-xs leading-relaxed">{body}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PHYSICAL ART FOUNDATION ── */}
+      <section className="py-20 px-4 border-t border-[#cc2200]/20">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-4">The Foundation</p>
+          <h3 className="font-cinzel font-bold text-2xl md:text-3xl text-[#f0ede8] mb-6">
+            Born from the Physical World
+          </h3>
+          <p className="font-mono-custom text-[#f0ede8]/60 text-sm leading-relaxed max-w-xl mx-auto mb-8">
+            Every piece in The 333 Collection is rooted in something real. Each token's background was
+            composed from an original, real-life physical artwork — captured, layered, and woven into
+            the digital piece you hold. This is not generated imagery. These are living textures pulled
+            from the physical world and carried on-chain, forever.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="border border-[#cc2200]/20 p-5 text-left flex-1">
+              <div className="font-mono-custom text-[#cc2200] text-[10px] tracking-widest mb-2">ORIGIN</div>
+              <div className="font-cinzel text-sm text-[#f0ede8] font-semibold mb-1">Real Physical Art</div>
+              <div className="font-mono-custom text-[#f0ede8]/40 text-xs leading-relaxed">
+                Each background began as a tangible, hand-crafted piece before it became a token.
+              </div>
+            </div>
+            <div className="border border-[#cc2200]/20 p-5 text-left flex-1">
+              <div className="font-mono-custom text-[#cc2200] text-[10px] tracking-widest mb-2">PERMANENCE</div>
+              <div className="font-cinzel text-sm text-[#f0ede8] font-semibold mb-1">Immutable On-Chain</div>
+              <div className="font-mono-custom text-[#f0ede8]/40 text-xs leading-relaxed">
+                Once minted, the artwork and its physical origin live on Solana permanently — no servers, no expiry.
+              </div>
+            </div>
+            <div className="border border-[#cc2200]/20 p-5 text-left flex-1">
+              <div className="font-mono-custom text-[#cc2200] text-[10px] tracking-widest mb-2">INTENTION</div>
+              <div className="font-cinzel text-sm text-[#f0ede8] font-semibold mb-1">Meaning in Every Layer</div>
+              <div className="font-mono-custom text-[#f0ede8]/40 text-xs leading-relaxed">
+                The physical and digital are inseparable here — each token carries the energy of both worlds.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── THEMES ── */}
+      <section className="py-20 px-4 border-t border-[#cc2200]/20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-3">Manifestation Themes</p>
+            <h3 className="font-cinzel font-bold text-2xl md:text-3xl text-[#f0ede8]">7 Intentions · 333 Tokens</h3>
+            <p className="font-mono-custom text-[#f0ede8]/40 text-xs mt-3 max-w-lg mx-auto leading-relaxed">
+              Themes cycle in order. Each token carries one intention — cycling through all 7 until the collection is complete.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {THEMES.map((theme, i) => (
+              <div
+                key={i}
+                className="border border-[#cc2200]/20 p-4 hover:border-[#cc2200]/60 hover:bg-[#cc2200]/5 transition-all duration-300 group"
+              >
+                <div className="text-2xl mb-2">{theme.emoji}</div>
+                <div className="font-cinzel text-sm font-semibold text-[#f0ede8] group-hover:text-[#cc2200] transition-colors">
+                  {theme.name}
+                </div>
+                <div className="font-mono-custom text-[10px] text-[#f0ede8]/30 mt-1">
+                  #{i + 1}, #{i + 8}, #{i + 15}...
+                </div>
+              </div>
+            ))}
+            {/* 8th card — the mechanic */}
+            <div className="border border-[#cc2200]/40 p-4 bg-[#cc2200]/5 col-span-2 md:col-span-1">
+              <div className="text-2xl mb-2">🌕</div>
+              <div className="font-cinzel text-sm font-semibold text-[#cc2200]">
+                The Awakening
+              </div>
+              <div className="font-mono-custom text-[10px] text-[#f0ede8]/50 mt-1 leading-relaxed">
+                Connect your wallet here<br />3–6 AM and PM EST to witness it
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS ── */}
+      <section className="py-20 px-4 border-t border-[#cc2200]/20">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="font-mono-custom text-[#cc2200] text-xs tracking-[0.5em] uppercase mb-3">The Mechanic</p>
+            <h3 className="font-cinzel font-bold text-2xl md:text-3xl text-[#f0ede8]">How It Works</h3>
+            <div className="mt-4">
+              <Link href="/mechanics">
+                <span className="inline-block font-mono-custom text-[10px] text-[#cc2200]/70 hover:text-[#cc2200] border border-[#cc2200]/30 hover:border-[#cc2200]/70 px-4 py-2 tracking-widest transition-all duration-300 cursor-pointer">
+                  FULL MECHANICS &amp; ARCHITECTURE →
+                </span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="space-y-0">
+            <div className="flex gap-6 py-8 border-b border-[#cc2200]/10">
+              <div className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">01</div>
+              <div>
+                <div className="font-cinzel font-semibold text-[#f0ede8] mb-2">333 tokens. 7 intentions.</div>
+                <div className="font-mono-custom text-[#f0ede8]/50 text-xs leading-relaxed">
+                  Each of the 333 tokens carries one of 7 manifestation themes — Strength, Joy, Love, Abundance, Health, Prosperity, and Home. The themes cycle in order across the full collection, created by hand by{" "}
+                  <Link href="/about"><span className="text-[#cc2200] hover:text-[#f0ede8] transition-colors cursor-pointer underline underline-offset-2">the artist herself</span></Link>.
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-6 py-8 border-b border-[#cc2200]/10">
+              <div className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">02</div>
+              <div>
+                <div className="font-cinzel font-semibold text-[#f0ede8] mb-2">It lives in your wallet</div>
+                <div className="font-mono-custom text-[#f0ede8]/50 text-xs leading-relaxed">
+                  Your token sits dormant in your Solana wallet — a blood moon image, still and waiting. Visible on any Solana explorer and NFT marketplace.
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-6 py-8 border-b border-[#cc2200]/10">
+              <div className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">03</div>
+              <div>
+                <div className="font-cinzel font-semibold text-[#f0ede8] mb-2">It awakens twice a day — right here</div>
+                <div className="font-mono-custom text-[#f0ede8]/50 text-xs leading-relaxed">
+                  Every day from 3–6 AM and 3–6 PM EST, your token transforms into its awakened glitch state. To witness it, come back to this page and connect your wallet — that's the only place the awakening is visible. No marketplace required. Just you, your wallet, and the window. The number 333 has followed{" "}
+                  <Link href="/about"><span className="text-[#cc2200] hover:text-[#f0ede8] transition-colors cursor-pointer underline underline-offset-2">Morgen</span></Link>{" "}
+                  her entire life. This is her way of putting it on-chain, forever.
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-6 py-8">
+              <div className="font-mono-custom text-[#cc2200] text-xs font-bold tracking-widest pt-1 shrink-0">04</div>
+              <div>
+                <div className="font-cinzel font-semibold text-[#f0ede8] mb-2">Permanent. No expiry.</div>
+                <div className="font-mono-custom text-[#f0ede8]/50 text-xs leading-relaxed">
+                  The awakening is powered by a live metadata API on Solana. No servers to shut down. No expiry date. As long as the internet exists, your token awakens every day.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* About CTA */}
+          <div className="mt-10 pt-10 border-t border-[#cc2200]/10 text-center">
+            <p className="font-mono-custom text-[#f0ede8]/40 text-xs tracking-widest mb-4">
+              WANT TO KNOW WHO'S BEHIND THIS?
+            </p>
+            <Link href="/about">
+              <span className="inline-block font-cinzel font-semibold text-sm text-[#f0ede8] bg-[#cc2200]/10 hover:bg-[#cc2200]/20 border border-[#cc2200]/40 hover:border-[#cc2200]/80 px-8 py-3 tracking-widest transition-all duration-300 cursor-pointer">
+                MEET MORGEN →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="py-12 px-4 border-t border-[#cc2200]/20">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="font-cinzel font-bold text-lg text-[#f0ede8]">The 333 Collection</p>
+            <p className="font-mono-custom text-[10px] text-[#f0ede8]/30 tracking-widest mt-1">SOLANA · METAPLEX · 3/3/2026</p>
+          </div>
+          <div className="flex gap-6 items-center">
+            <a
+              href={TWITTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono-custom text-xs text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest"
+            >
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              TWITTER
+            </a>
+            <a
+              href={`https://solscan.io/token/${COLLECTION_MINT_ID}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono-custom text-xs text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest"
+            >
+              SOLSCAN
+            </a>
+            <Link href="/mechanics">
+              <span className="font-mono-custom text-xs text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest cursor-pointer">
+                HOW IT WORKS
+              </span>
+            </Link>
+            <Link href="/about">
+              <span className="font-mono-custom text-xs text-[#f0ede8]/40 hover:text-[#cc2200] transition-colors tracking-widest cursor-pointer">
+                ABOUT
+              </span>
+            </Link>
+          </div>
+          <p className="font-mono-custom text-[10px] text-[#f0ede8]/20 tracking-widest">
+            5% ROYALTIES · IMMUTABLE METADATA
+          </p>
+        </div>
+      </footer>
+
+    </div>
+  );
+}
+NFT Collection Launch Inspired by Blood Moon on 3/3 - Manus

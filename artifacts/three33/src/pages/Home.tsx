@@ -3,8 +3,6 @@ import { Link } from "wouter";
 
 const CANDY_MACHINE_ID = "EV6FZEwQfr1NdJ9GZ4oSHRPDJZMYgpACCwQy6ipZFNPe";
 const COLLECTION_MINT_ID = "DDA9DiC7ahLjiu4eUbvHdsD6Go9j4ar3JQeohegQ7Jzn";
-const MAGIC_EDEN_MINT_URL = `https://magiceden.io/launchpad/${CANDY_MACHINE_ID}`;
-const TENSOR_MINT_URL = `https://www.tensor.trade/mint/${CANDY_MACHINE_ID}`;
 const MINT_LANDING_URL = "https://333landingpage.vercel.app";
 const TWITTER_URL = "https://x.com/AiArsenals";
 const TOTAL_SUPPLY = 333;
@@ -528,33 +526,6 @@ export default function Home() {
               MINT AND VIEW HERE
             </a>
 
-            {/* Also available on */}
-            <div className="flex gap-3">
-              <a
-                href={MAGIC_EDEN_MINT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="link-magic-eden"
-                className="flex-1 font-mono-custom text-center py-3 transition-colors duration-300"
-                style={{ fontSize: "9px", letterSpacing: "0.2em", border: "1px solid rgba(204,34,0,0.15)", color: "rgba(240,237,232,0.4)" }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(204,34,0,0.5)")}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(204,34,0,0.15)")}
-              >
-                MAGIC EDEN
-              </a>
-              <a
-                href={TENSOR_MINT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="link-tensor"
-                className="flex-1 font-mono-custom text-center py-3 transition-colors duration-300"
-                style={{ fontSize: "9px", letterSpacing: "0.2em", border: "1px solid rgba(204,34,0,0.15)", color: "rgba(240,237,232,0.4)" }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(204,34,0,0.5)")}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(204,34,0,0.15)")}
-              >
-                TENSOR
-              </a>
-            </div>
 
             {/* Contract addresses */}
             <div className="space-y-2">

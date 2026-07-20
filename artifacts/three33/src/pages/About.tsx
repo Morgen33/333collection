@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 
-const MINT_LANDING_URL = "https://333landingpage.vercel.app";
+const MINT_LANDING_URL = "https://mint.333collection.xyz";
 const INSTAGRAM_URL = "https://www.instagram.com/morgen__victoria/";
 const TWITTER_URL = "https://x.com/AiArsenals";
 

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 
-const MINT_LANDING_URL = "https://333landingpage.vercel.app";
+const MINT_LANDING_URL = "https://mint.333collection.xyz";
 
 const SECTIONS = [
   { id: "vision", label: "The Vision", number: "01" },

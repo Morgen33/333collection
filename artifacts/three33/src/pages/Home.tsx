@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 const CANDY_MACHINE_ID = "EV6FZEwQfr1NdJ9GZ4oSHRPDJZMYgpACCwQy6ipZFNPe";
 const COLLECTION_MINT_ID = "DDA9DiC7ahLjiu4eUbvHdsD6Go9j4ar3JQeohegQ7Jzn";
-const MINT_LANDING_URL = "https://mint.333collection.xyz";
+const MINT_LANDING_URL = "https://333landingpage.vercel.app";
 const TWITTER_URL = "https://x.com/AiArsenals";
 const TOTAL_SUPPLY = 333;
 

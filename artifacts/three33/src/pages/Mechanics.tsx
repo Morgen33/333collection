@@ -75,13 +75,13 @@ const HURDLES = [
 ];
 
 const ORIGINAL_ART = [
-  { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-1-pink-flow_724d7d75.jpeg", label: "Strength & Power", medium: "Acrylic pour on canvas" },
-  { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-2-red-sky_13abed4a.jpeg", label: "Happy & Joy", medium: "Acrylic on canvas" },
-  { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-3-fire-bloom_fb25e354.jpeg", label: "Love & Connection", medium: "Alcohol ink & resin" },
-  { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-4-cosmic-garden_a604795e.jpeg", label: "Money & Abundance", medium: "Acrylic & alcohol ink" },
-  { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-5-deep-blue_5b5eb51b.jpeg", label: "Health & Vitality", medium: "Alcohol ink on canvas" },
-  { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-6-nebula_47f85e36.jpeg", label: "Wealth & Prosperity", medium: "Alcohol ink & resin" },
-  { url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663209436663/LUq9frbKqsiXrvuVDyskXB/art-7-emerald_b801924b.jpeg", label: "Home & Security", medium: "Acrylic & alcohol ink" },
+  "/original-art/art-1-strength.jpg",
+  "/original-art/art-2-joy.jpg",
+  "/original-art/art-3-love.jpg",
+  "/original-art/art-4-money.jpg",
+  "/original-art/art-5-health.jpg",
+  "/original-art/art-6-wealth.jpg",
+  "/original-art/art-7-emerald.jpg",
 ];
 
 export default function Mechanics() {
@@ -404,7 +404,7 @@ export default function Mechanics() {
             <div>
               <h2 className="font-cinzel font-bold mb-3" style={{ fontSize: "clamp(1.8rem, 5vw, 2.5rem)", color: "#f0ede8" }}>The Original Art</h2>
               <p className="font-mono-custom text-xs leading-relaxed max-w-2xl" style={{ color: "rgba(240,237,232,0.45)" }}>
-                These are the 7 original physical paintings that serve as the backgrounds for the 333 Collection.
+                These are the original physical paintings that serve as the backgrounds for the 333 Collection.
                 Each one was created by hand — acrylic paint, alcohol ink, and resin on canvas.
                 They exist as real objects in the world. What you see in each token began here.
               </p>
@@ -412,9 +412,9 @@ export default function Mechanics() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10">
-            {ORIGINAL_ART.map(({ url, label, medium }, i) => (
+            {ORIGINAL_ART.map((url, i) => (
               <div
-                key={i}
+                key={url}
                 className="group overflow-hidden relative transition-all duration-300"
                 data-testid={`art-${i}`}
                 style={{ border: "1px solid rgba(204,34,0,0.2)" }}
@@ -424,13 +424,11 @@ export default function Mechanics() {
                 <div className="aspect-square overflow-hidden">
                   <img
                     src={url}
-                    alt={label}
+                    alt={`Original painting ${i + 1}`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                </div>
-                <div className="p-3" style={{ background: "rgba(10,0,8,0.9)" }}>
-                  <p className="font-cinzel text-xs font-semibold leading-tight" style={{ color: "#f0ede8" }}>{label}</p>
-                  <p className="font-mono-custom mt-1" style={{ fontSize: "9px", letterSpacing: "0.3em", color: "rgba(204,34,0,0.7)", textTransform: "uppercase" }}>{medium}</p>
                 </div>
               </div>
             ))}
@@ -442,7 +440,7 @@ export default function Mechanics() {
             >
               <p className="font-mono-custom mb-2" style={{ fontSize: "9px", letterSpacing: "0.3em", color: "#cc2200", textTransform: "uppercase" }}>Original Works</p>
               <p className="font-mono-custom leading-relaxed" style={{ fontSize: "9px", color: "rgba(240,237,232,0.35)" }}>
-                All 7 pieces exist as physical originals. The digital collection was built on top of them.
+                These pieces exist as physical originals. The digital collection was built on top of them.
               </p>
             </div>
           </div>
